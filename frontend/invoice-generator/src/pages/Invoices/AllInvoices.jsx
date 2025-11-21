@@ -269,7 +269,7 @@ const AllInvoices = () => {
                 : 'Get started by creating your first invoice.'}
             </p>
             {!searchTerm && statusFilter === 'All' && (
-              <Button onClick={() => navigate('/invoices/create')}>
+              <Button onClick={() => navigate('/invoices/new')}>
                 Create Invoice
               </Button>
             )}
