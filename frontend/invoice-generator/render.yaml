@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: my-react-app
+    env: static
+    region: us-central
+    staticPublishPath: /build
+    staticFiles:
+      - path: /
+        publishPath: /build
+    routes:
+      - source: /.*
+        destination: /index.html
