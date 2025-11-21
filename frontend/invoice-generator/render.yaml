@@ -2,11 +2,9 @@ services:
   - type: web
     name: my-react-app
     env: static
-    region: us-central
-    staticPublishPath: /build
-    staticFiles:
-      - path: /
-        publishPath: /build
+    region: <your-region>          # e.g. us-central
+    staticPublishPath: /build      # path to your React build folder
     routes:
-      - source: /.*
+      - type: rewrite
+        source: /.*
         destination: /index.html
