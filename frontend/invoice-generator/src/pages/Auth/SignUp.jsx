@@ -43,7 +43,7 @@ const SignUp = () => {
     confirmPassword: false,
   });
   const [agreeToTerms, setAgreeToTerms] = useState(false);
-   
+  
   // Validation functions
   const validateName = (name) => {
     if (!name) return "Full name is required";
@@ -169,8 +169,20 @@ const SignUp = () => {
         password: formData.password,
       });
 
-      const { user, token } = response.data;
+      console.log("Signup response:", response.data); // Debug API response
+
+      const { email, name, token, _id } = response.data;
+
+      if (!email || !token) {
+        setError("Signup failed: Invalid response from server");
+        setIsLoading(false);
+        return;
+      }
+
+      const user = { email, name, _id };
+
       login(user, token);
+
       setSuccess("Account created successfully! Redirecting...");
       
       // Redirect to dashboard
@@ -373,7 +385,7 @@ const SignUp = () => {
             <button
               type="submit"
               disabled={isLoading || !isFormValid()}
-              className="w-full bg-gradient-to-r from-blue-950 to-blue-900 text-white py-3 px-4 rounded-lg  font-medium hover:bg-gray-800 disabled:bg-gray-300 diabled:cursor-not-allowed flex items-center justify-center gap-2 transition-colors"
+              className="w-full bg-gradient-to-r from-blue-950 to-blue-900 text-white py-3 px-4 rounded-lg font-medium hover:bg-gray-800 disabled:bg-gray-300 diabled:cursor-not-allowed flex items-center justify-center gap-2 transition-colors"
             >
               {isLoading ? (
                 <>
